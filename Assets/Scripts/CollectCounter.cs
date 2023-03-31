@@ -6,19 +6,17 @@ using UnityEngine.UI;
 public class CollectCounter : MonoBehaviour
 {
     public int counter = 0;
-    int rd;
-    public int[] searcharr = { 0, 0, 0, 0, 0, 0, 0 };
-    public List<int> vals;
-    
+    public int totalCount = 7;
+    private float timer = 0.0f;
+    public GameObject FishEgg;
+    private bool lock1 = false;
+    private bool lock2 = false;
+    private bool lock3 = false;
 
     public void increaseCount(){
         counter++; 
-        GameObject.Find("EggCounter").GetComponent<Text>().text = "Eggs collected: " + counter + "/7";
+        GameObject.Find("EggCounter").GetComponent<Text>().text = "Eggs collected: " + counter + "/" + totalCount;
         Debug.Log("count = " + counter);
-        rd = Random.Range(0, vals.Count);
-        searcharr[counter - 1] = vals[rd];
-        vals.RemoveAt(rd);
-
     }
     
     public void ResetCounter(){
@@ -29,15 +27,54 @@ public class CollectCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 1; i < 8; i++){
-            vals.Add(i);
-        }
+
     }
 
     
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+        
+        //at 5 seconds
+        if (timer >= 5 && lock1 == false){
+            if (counter >= 2){
+            Debug.Log("first special egg spawning");
+            Instantiate(FishEgg, new Vector3(-16.0f, 2.0f, -36.5f), Quaternion.identity);
+            totalCount++;
+            GameObject.Find("EggCounter").GetComponent<Text>().text = "Eggs collected: " + counter + "/" + totalCount;
+            lock1 = true;
+            }else {
+            lock1 = true; 
+            }
+            
+        }
+        
+        //at 10 seconds
+        if (timer >= 10 && lock2 == false){
+            if(counter >= 5){
+            Debug.Log("second special egg spawning");
+            Instantiate(FishEgg, new Vector3(5.5f, 2.0f, -9.0f), Quaternion.identity);
+            totalCount++;
+            GameObject.Find("EggCounter").GetComponent<Text>().text = "Eggs collected: " + counter + "/" + totalCount;
+            lock2 = true;
+            }else {
+            lock2 = true; 
+            }
+        }
+
+        //at 15 seconds
+        if (timer >= 15 && lock3 == false){
+            if(counter >= 9){
+            Debug.Log("third special egg spawning");
+            Instantiate(FishEgg, new Vector3(-43.0f, 2.0f, -17.0f), Quaternion.identity);
+            totalCount++;
+            GameObject.Find("EggCounter").GetComponent<Text>().text = "Eggs collected: " + counter + "/" + totalCount;
+            lock3 = true;
+            }else {
+            lock3 = true; 
+            }
+        }
         
     }
 

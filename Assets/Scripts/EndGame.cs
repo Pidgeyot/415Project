@@ -8,14 +8,11 @@ public class EndGame : MonoBehaviour
     //Declaring variables
     bool crossedBoundary;
     GameObject WinText; 
-    int gameIteration = 0;
-    bool gameOptimize = false;
-    Vector3 turtlePosition;
-
+  
     void Start() {
         WinText = GameObject.Find("WinText");
         WinText.SetActive(false); 
-        turtlePosition = GameObject.Find("Turtle").transform.position;
+
     }          
     public void OnCollisionEnter(Collision other)
     {
@@ -23,65 +20,18 @@ public class EndGame : MonoBehaviour
         if (other.gameObject.tag == "Turtle")
         {
             Debug.Log("Turtle has reached ocean!");
-            if (GameObject.Find("GameManager").GetComponent<CollectCounter>().counter >= 7 && gameOptimize != true)
+            if (GameObject.Find("GameManager").GetComponent<CollectCounter>().counter == 7)
             {
-                Debug.Log("Turtle has reached ocean.....AND WON");
-                GameObject.Find("Turtle").transform.position = turtlePosition;
-                EggRespawn();
-                GameObject.Find("GameManager").GetComponent<CollectCounter>().ResetCounter();
-                gameIteration++;
-                EggReColor();
-            }else if (GameObject.Find("GameManager").GetComponent<CollectCounter>().counter >= 7 && gameOptimize == true){
                 WinText.SetActive(true);
                 GameObject.Find("Turtle").GetComponent<PlayerMovement>().enabled = false;
+            }else if(GameObject.Find("GameManager").GetComponent<CollectCounter>().counter > 7){
+                WinText.SetActive(true);
+                GameObject.Find("Turtle").GetComponent<PlayerMovement>().enabled = false;
+                //confetti or smth? idk
+                if(GameObject.Find("GameManager").GetComponent<CollectCounter>().counter == 10){
+                    //extra special congratulations
+                }
             }
-            
         }
-    }
-
-    public void EggRespawn(){
-     GameObject.Find("FishEgg").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg").GetComponent<Collectibles>().hit = 0;
-     GameObject.Find("FishEgg (1)").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg (1)").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg (1)").GetComponent<Collectibles>().hit = 0;
-     GameObject.Find("FishEgg (2)").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg (2)").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg (2)").GetComponent<Collectibles>().hit = 0;
-     GameObject.Find("FishEgg (3)").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg (3)").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg (3)").GetComponent<Collectibles>().hit = 0;
-     GameObject.Find("FishEgg (4)").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg (4)").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg (4)").GetComponent<Collectibles>().hit = 0;
-     GameObject.Find("FishEgg (5)").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg (5)").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg (5)").GetComponent<Collectibles>().hit = 0;
-     GameObject.Find("FishEgg (6)").GetComponent<Collider>().enabled = true;
-     GameObject.Find("FishEgg (6)").GetComponent<MeshRenderer>().enabled = true;
-     GameObject.Find("FishEgg (6)").GetComponent<Collectibles>().hit = 0;
-    }
-
-    public void EggReColor(){
-     if(gameIteration == 1){
-       GameObject.Find("FishEgg").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (1)").GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-       GameObject.Find("FishEgg (2)").GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-       GameObject.Find("FishEgg (3)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (4)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (5)").GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-       GameObject.Find("FishEgg (6)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-      }
-     if(gameIteration == 2){
-       GameObject.Find("FishEgg").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (1)").GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-       GameObject.Find("FishEgg (2)").GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-       GameObject.Find("FishEgg (3)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (4)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (5)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       GameObject.Find("FishEgg (6)").GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-       gameOptimize = true;
-      }
     }
 }
