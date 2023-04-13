@@ -12,6 +12,7 @@ public class CollectCounter : MonoBehaviour
     private bool lock1 = false;
     private bool lock2 = false;
     private bool lock3 = false;
+    
 
     public void increaseCount(){
         counter++; 
@@ -27,7 +28,6 @@ public class CollectCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     
@@ -35,10 +35,10 @@ public class CollectCounter : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        
+        Random.InitState(System.DateTime.Now.Millisecond);
         //at 5 seconds
-        if (timer >= 5 && lock1 == false){
-            if (counter >= 2){
+        if (timer >= 5 && lock1 == false){    
+            if (counter >= Random.Range(0, 2)){
             Debug.Log("first special egg spawning");
             Instantiate(FishEgg, new Vector3(-16.0f, 2.0f, -36.5f), Quaternion.identity);
             totalCount++;
@@ -52,7 +52,7 @@ public class CollectCounter : MonoBehaviour
         
         //at 10 seconds
         if (timer >= 10 && lock2 == false){
-            if(counter >= 5){
+            if(counter >= Random.Range(0, 5)){  
             Debug.Log("second special egg spawning");
             Instantiate(FishEgg, new Vector3(5.5f, 2.0f, -9.0f), Quaternion.identity);
             totalCount++;
@@ -65,7 +65,7 @@ public class CollectCounter : MonoBehaviour
 
         //at 15 seconds
         if (timer >= 15 && lock3 == false){
-            if(counter >= 9){
+            if(counter >= Random.Range(0, 9)){
             Debug.Log("third special egg spawning");
             Instantiate(FishEgg, new Vector3(-43.0f, 2.0f, -17.0f), Quaternion.identity);
             totalCount++;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class EndGame : MonoBehaviour
 {
     //This script must be attached to the end game zone
@@ -8,10 +9,19 @@ public class EndGame : MonoBehaviour
     //Declaring variables
     bool crossedBoundary;
     GameObject WinText; 
+    GameObject Rain; 
+    
   
     void Start() {
         WinText = GameObject.Find("WinText");
         WinText.SetActive(false); 
+        if(Random.Range(0, 10) <= 2){
+         GameObject.Find("Turtle").GetComponent<PlayerMovement>().speed = 12.5f;
+         GameObject.Find("Directional Light").GetComponent<Light>().color = new Color32(157, 157, 246, 255); 
+        }else{
+         GameObject.Find("Rain Overlay").SetActive(false); 
+        }
+        
 
     }          
     public void OnCollisionEnter(Collision other)

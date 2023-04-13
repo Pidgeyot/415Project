@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //var collected count
-    // Start is called before the first frame update
+    public float speed;
+    
     void Start()
     {
-
+        speed = 25f;
     }
-    public float speed = 10f;
+    
 
     void Update()
     {
