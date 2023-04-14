@@ -34,12 +34,19 @@ public class EndGame : MonoBehaviour
             {
                 WinText.SetActive(true);
                 GameObject.Find("Turtle").GetComponent<PlayerMovement>().enabled = false;
+                
             }else if(GameObject.Find("GameManager").GetComponent<CollectCounter>().counter > 7){
                 WinText.SetActive(true);
                 GameObject.Find("Turtle").GetComponent<PlayerMovement>().enabled = false;
-                //confetti or smth? idk
+                GameObject.Find("Fireworks").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("Fireworks (1)").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("Fireworks (2)").GetComponent<ParticleSystem>().Play();
                 if(GameObject.Find("GameManager").GetComponent<CollectCounter>().counter == 10){
-                    //extra special congratulations
+                GameObject.Find("Fireworks").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("Fireworks (1)").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("Fireworks (2)").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("Fireworks (3)").GetComponent<ParticleSystem>().Play();
+                GameObject.Find("Fireworks (4)").GetComponent<ParticleSystem>().Play();
                 }
             }
         }
